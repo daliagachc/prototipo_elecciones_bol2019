@@ -1,3 +1,1 @@
-hello wolrd
-
-[Prototipo](./proto.html)
+[gráficas](./prototipo_elecciones_bol/visualizacion_interactiva_2019/visualizacion_interactiva_2019.html)
