@@ -40,6 +40,7 @@ ds = lfc.get_ds(df_rec)
 # %%
 
 bokeh.io.output_notebook()
+bokeh.io.output_file('proto.html')
 cdf = bokeh.models.ColumnDataSource(df_rec)
 plt_size = 500
 
@@ -60,7 +61,9 @@ f,f1 = lfc.get_double_plot(var,df_rec,ds,cdf)
 
 gp3 = bokeh.plotting.gridplot([[f,f1]], plot_height=plt_size, plot_width=plt_size)
 
-bokeh.plotting.show(bokeh.plotting.Column(gp,gp1,gp2,gp3))
+bokeh.plotting.show(bokeh.plotting.Column(gp,
+                                          # gp1,gp2,gp3
+                                          ))
 # bokeh.plotting.show(f1)
 # %%
 # %%
