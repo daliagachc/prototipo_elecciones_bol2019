@@ -13,7 +13,7 @@
 #     name: python3
 # ---
 
-# %%
+# %% slideshow={"slide_type": "slide"}
 # project name: code-bol-2019
 # created by diego aliaga daliaga_at_chacaltaya.edu.bo
 
@@ -37,10 +37,10 @@ df_rec = lfc.get_df_rec(engine)
 # %%
 ds = lfc.get_ds(df_rec)
 # %%
-# %%
+# %% slideshow={"slide_type": "slide"}
 
 bokeh.io.output_notebook()
-bokeh.io.output_file('proto.html')
+# bokeh.io.output_file('proto.html')
 cdf = bokeh.models.ColumnDataSource(df_rec)
 plt_size = 500
 
@@ -76,6 +76,8 @@ bokeh.plotting.show(bokeh.plotting.Column(gp,
 # %%
 # %%
 # %%
+
+
 
 
 
