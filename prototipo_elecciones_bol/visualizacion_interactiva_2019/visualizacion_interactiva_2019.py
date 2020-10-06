@@ -13,13 +13,16 @@
 #     name: python3
 # ---
 
-# %% slideshow={"slide_type": "slide"}
+# %% slideshow={"slide_type": "slide"} hideCode=false hidePrompt=false hideOutput=true
 # project name: code-bol-2019
 # created by diego aliaga daliaga_at_chacaltaya.edu.bo
 
-# %%
+# %% hidePrompt=false hideCode=false hide_input=false slideshow={"slide_type": "slide"} hideOutput=true
 from useful_scit.imps import *
 import prototipo_elecciones_bol.visualizacion_interactiva_2019.visualizacion_interactiva_2019_lfc as lfc
+from prototipo_elecciones_bol.\
+    visualizacion_interactiva_2019.\
+    visualizacion_interactiva_2019_lfc import _f
 import bokeh
 import bokeh.plotting
 import bokeh.io
@@ -29,62 +32,91 @@ import bokeh.palettes
 
 
 from sqlalchemy import create_engine
-# %%
+# %% hideCode=false hidePrompt=false slideshow={"slide_type": "skip"} hideOutput=true
 # def main():
-# %%
+# %% hideCode=false hidePrompt=false slideshow={"slide_type": "skip"} hideOutput=true
 engine = lfc.get_engine()
 df_rec = lfc.get_df_rec(engine)
-# %%
 ds = lfc.get_ds(df_rec)
-# %%
-# %% slideshow={"slide_type": "slide"}
+ops = {'df':df_rec,'ds':ds}
+# %% hideCode=false hidePrompt=false slideshow={"slide_type": "skip"} hideOutput=true hide_input=false
+# %% [markdown] hidePrompt=false hideCode=false
+# # Diferencia MAS - CC 
 
-bokeh.io.output_notebook()
-# bokeh.io.output_file('proto.html')
-cdf = bokeh.models.ColumnDataSource(df_rec)
-plt_size = 500
+# %% slideshow={"slide_type": "slide"} tags=["to_remove"] hideCode=false hideOutput=false hidePrompt=false
+_f('MAS-CC',ops)
 
-var = 'MAS-CC'
-f,f1 = lfc.get_double_plot(var,df_rec,ds,cdf)
-gp = bokeh.plotting.gridplot([[f,f1]], plot_height=plt_size, plot_width=plt_size)
+# %% [markdown] hidePrompt=false hideCode=false
+# # Votos MAS
 
-var = 'MAS'
-f,f1 = lfc.get_double_plot(var,df_rec,ds,cdf)
-gp1 = bokeh.plotting.gridplot([[f,f1]], plot_height=plt_size, plot_width=plt_size)
+# %% slideshow={"slide_type": "skip"} hideCode=false hidePrompt=false hide_input=false
+_f("MAS",ops)
+# %% [markdown] hideCode=false hidePrompt=false
+# # Votos CC
 
-var = 'CC'
-f,f1 = lfc.get_double_plot(var,df_rec,ds,cdf)
-gp2 = bokeh.plotting.gridplot([[f,f1]], plot_height=plt_size, plot_width=plt_size)
+# %% hideCode=false hidePrompt=false
+_f("CC",ops)
 
-var = 'PDC'
-f,f1 = lfc.get_double_plot(var,df_rec,ds,cdf)
+# %% [markdown] hideCode=false hidePrompt=false
+# # Votos PDC
 
-gp3 = bokeh.plotting.gridplot([[f,f1]], plot_height=plt_size, plot_width=plt_size)
+# %% hideCode=false hidePrompt=false
+_f('PDC',ops)
 
-bokeh.plotting.show(bokeh.plotting.Column(gp,
-                                          # gp1,gp2,gp3
-                                          ))
-# bokeh.plotting.show(f1)
-# %%
-# %%
-# %%
-# %%
-# %%
-# %%
-# %%
-# %%
-# %%
-# %%
-# %%
+# %% [markdown] hideCode=false hidePrompt=false
+# # Exportar
 
-
-
-
-
-
+# %% hideCode=false hidePrompt=false slideshow={"slide_type": "skip"} hide_input=false
+# !jupyter nbconvert --to hide_code_html visualizacion_interactiva_2019.ipynb
+# # !jupyter nbconvert --TagRemovePreprocessor.remove_input_tags={\"to_remove\"} --to html visualizacion_interactiva_2019.ipynb
+# # !open visualizacion_interactiva_2019.slides.html
+# !open visualizacion_interactiva_2019.html
+# %% hideCode=false hidePrompt=false hide_input=false
+# !jupyter nbconvert --to slides --reveal-prefix reveal.js visualizacion_interactiva_2019.ipynb
+# !open visualizacion_interactiva_2019.slides.html
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
+# %% hideCode=false hidePrompt=false
 
 
 
-# %%
+# %% hideCode=false hidePrompt=false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# %% hideCode=false hidePrompt=false
 
 

@@ -179,6 +179,10 @@ def get_double_plot(var,df_rec,ds, cdf):
     TOOLS = "pan,wheel_zoom," \
             "box_zoom," \
             "reset,box_select,"
+    active_tools = {
+        'active_scroll':'wheel_zoom',
+        'active_inspect':None
+    }
 
     hover = bokeh.models.tools.HoverTool(
         tooltips=[
@@ -196,19 +200,20 @@ def get_double_plot(var,df_rec,ds, cdf):
 
     pst = bokeh.models.tools.LassoSelectTool(names=['smap', 'scarto'])
     # plot 1
-    f = map_var(TOOLS, cm, cdf, pst, hover, var)
-    f1 = cart_var(TOOLS, cm, cdf, pst, hover, var, ds)
+    f = map_var(TOOLS, cm, cdf, pst, hover, var, active_tools)
+    f1 = cart_var(TOOLS, cm, cdf, pst, hover, var, ds, active_tools)
     return f,f1
 
 def myround(x, base=5):
     return base * round(x / base)
 
-def map_var(TOOLS,cm,cdf,pst,hover,var):
+def map_var(TOOLS,cm,cdf,pst,hover,var, active_tools):
     f = bokeh.plotting.figure(
         tools=TOOLS,
         x_axis_type='mercator',
         y_axis_type='mercator',
-        output_backend="webgl"
+        output_backend="webgl",
+        **active_tools
     )
     # noinspection PyUnresolvedReferences
     tile_provider = bokeh.tile_providers.get_provider(
@@ -229,7 +234,7 @@ def map_var(TOOLS,cm,cdf,pst,hover,var):
     color_bar = bokeh.models.ColorBar(
         color_mapper=cm['transform'],
         # width=40,
-        # location=(0, 0),
+        location=(0, 0),
         title=var,
         # ticker=bokeh.models.ContinuousTicker(),
         title_standoff=10,
@@ -240,10 +245,11 @@ def map_var(TOOLS,cm,cdf,pst,hover,var):
     f.add_tools(hover)
     return f
 
-def cart_var(TOOLS, cm, cdf, pst, hover, var, ds):
+def cart_var(TOOLS, cm, cdf, pst, hover, var, ds, active_tools):
     f1 = bokeh.plotting.figure(
         tools=TOOLS,
-        output_backend="webgl"
+        output_backend="webgl",
+        **active_tools
     )
     f1.add_tools(pst)
 
@@ -269,3 +275,20 @@ def cart_var(TOOLS, cm, cdf, pst, hover, var, ds):
 
 
     return f1
+
+
+def _f(var, ops):
+    bokeh.io.output_notebook()
+    # bokeh.io.output_file('proto.html')
+    df_rec = ops['df']
+    ds = ops['ds']
+    cdf = bokeh.models.ColumnDataSource(df_rec)
+    plt_size = 400
+
+    #     var = 'MAS-CC'
+    f,f1 = get_double_plot(var,df_rec,ds,cdf)
+
+    gp = bokeh.plotting.gridplot([[f,f1]], plot_height=plt_size, plot_width=plt_size,
+                                 merge_tools=False)
+
+    bokeh.plotting.show(gp)
