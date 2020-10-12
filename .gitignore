@@ -3,3 +3,4 @@
 *.ipynb_checkpoints
 prototipo_elecciones_bol/__pycache__/
 prototipo_elecciones_bol/visualizacion_interactiva_2019/__pycache__/
+.DS_Store
